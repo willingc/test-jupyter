@@ -1,4 +1,4 @@
-name: nbconvert_docs
+name: testjup_docs
 channels:
 - asmeurer
 dependencies:
@@ -7,4 +7,4 @@ dependencies:
 - nbformat
 - jupyter_client
 - ipykernel
-- numpydoc
+- jupyter
