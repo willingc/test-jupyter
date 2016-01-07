@@ -2,6 +2,7 @@ name: nbconvert_docs
 channels:
 - asmeurer
 dependencies:
+- sphinx
 - pandoc
 - nbformat
 - jupyter_client
