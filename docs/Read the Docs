@@ -1,0 +1,59 @@
+Read the Docs
+=============
+
+Build Process
+-------------
+
+1. Check out code from repo
+2. If *Use Virtualenv* is checked, runs setup.py install. Installs package in virtualenv. Also installs requirements.txt.
+3. Build docs: sphinx-build -b html . _build/html where html is replaced by the type of doc being built.
+4. Serves docs
+
+readthedocs.doc_builder API
+---------------------------
+Example build
+
+Wipe
+----
+Clean all files on RTD
+
+Build technicals
+----------------
+looks for conf.py
+looks for docs or doc directory then defaults to top of this directory
+README.rst will be converted to index.rst
+
+
+Test code
+---------
+update_imported_docs(version)
+if exists('setup.py'):
+    run('python setup.py install')
+if project.requirements_file:
+    run('pip install -r %s' % project.requirements_file)
+build_docs(version=version)
+copy_files(artifact_dir)
+
+
+Builders have a very specific job. They take the updated source code and generate the correct artifacts. The code lives in self.version.project.checkout_path(self.version.slug). The artifacts should end up in self.version.project.artifact_path(version=self.version.slug, type=self.type) Where type is the name of your builder. All files that end up in the artifact directory should be in their final form.
+
+The readthedocs.doc_builder API explains the higher level parts of the API that you need to implement. A basic run goes something like this:
+
+backend = get_backend(project.documentation_type)
+if force:
+    backend.force(version)
+backend.clean(version)
+backend.build(version)
+if success:
+    backend.move(version)
+
+    import sys
+from unittest.mock import MagicMock
+
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+            return Mock()
+
+MOCK_MODULES = ['pygtk', 'gtk', 'gobject', 'argparse', 'numpy', 'pandas']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
