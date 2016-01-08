@@ -1,4 +1,4 @@
-name: testjup_docs
+name: testjupnb_docs
 channels:
 - asmeurer
 dependencies:
